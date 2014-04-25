@@ -4,5 +4,8 @@
     <string name="app_name">IMC</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+      <string name="Tab1">Hot off the oven!</string>
+    <string name="Tab2">Explore IMC</string>
+    
 
 </resources>

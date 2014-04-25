@@ -1,64 +1,79 @@
 package com.example.imc;
 
-import android.app.Activity;
+import android.app.ActionBar.Tab;
+
 import android.app.ActionBar;
-import android.app.Fragment;
+
+import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 
-public class MainActivity extends Activity {
+
+public class MainActivity extends FragmentActivity implements
+ActionBar.TabListener {
+
+private ViewPager viewPager;
+private TabsPagerAdapter mAdapter;
+private ActionBar actionBar;
+// Tab titles
+private String[] tabs = { "Home", "The Buzz", "Profile","About IMC" };
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+
+// Initialization
+viewPager = (ViewPager) findViewById(R.id.pager);
+actionBar = getActionBar();
+mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
+
+viewPager.setAdapter(mAdapter);
+actionBar.setHomeButtonEnabled(false);
+actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);		
+
+// Adding Tabs
+for (String tab_name : tabs) {
+	actionBar.addTab(actionBar.newTab().setText(tab_name)
+			.setTabListener(this));
+}
+
+/**
+ * on swiping the viewpager make respective tab selected
+ * */
+viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
-
-		if (savedInstanceState == null) {
-			getFragmentManager().beginTransaction()
-					.add(R.id.container, new PlaceholderFragment()).commit();
-		}
+	public void onPageSelected(int position) {
+		// on changing the page
+		// make respected tab selected
+		actionBar.setSelectedNavigationItem(position);
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+	public void onPageScrollStateChanged(int arg0) {
 	}
+});
+}
 
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	public static class PlaceholderFragment extends Fragment {
+@Override
+public void onTabReselected(Tab tab, FragmentTransaction ft) {
+}
 
-		public PlaceholderFragment() {
-		}
+@Override
+public void onTabSelected(Tab tab, FragmentTransaction ft) {
+// on tab selected
+// show respected fragment view
+viewPager.setCurrentItem(tab.getPosition());
+}
 
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container,
-				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_main, container,
-					false);
-			return rootView;
-		}
-	}
+@Override
+public void onTabUnselected(Tab tab, FragmentTransaction ft) {
+}
 
 }

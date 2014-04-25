@@ -1,7 +1,58 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ 
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    
+    android:padding="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp" >
+   <RelativeLayout
+    android:id="@+id/TopTab"    
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/rounded_rectangle"
+    android:padding="1dp"
+    android:paddingLeft="1dp"
+    android:paddingRight="1dp">  
+
+    <TextView
+        android:id="@+id/ExploreImc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/HotOffTheOven"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="14dp"
+         android:fontFamily="Avenir"
+        android:text="@string/Tab2"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFF"
+        android:typeface="normal" />
+    
+    <TextView
+        android:id="@+id/HotOffTheOven"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:fontFamily="Avenir"
+        android:text="@string/Tab1"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#FFF"
+        android:typeface="normal" />
+
+    
+   </RelativeLayout>  
+  
+    
+<android.support.v4.view.ViewPager 
+    android:id="@+id/pager"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.imc.MainActivity"
-    tools:ignore="MergeRootFrame" />
+    android:layout_below="@+id/TopTab" >
+</android.support.v4.view.ViewPager>
+ </RelativeLayout>  
