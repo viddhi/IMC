@@ -29,7 +29,10 @@ public final class R {
         public static final int ExploreImc=0x7f080001;
         public static final int HotOffTheOven=0x7f080002;
         public static final int TopTab=0x7f080000;
-        public static final int action_settings=0x7f080004;
+        public static final int menu_Home=0x7f080004;
+        public static final int menu_Profile=0x7f080006;
+        public static final int menu_aboutIMC=0x7f080007;
+        public static final int menu_thebuzz=0x7f080005;
         public static final int pager=0x7f080003;
     }
     public static final class layout {
@@ -39,13 +42,18 @@ public final class R {
         public static final int fragment_profile=0x7f030003;
         public static final int fragment_thebuzz=0x7f030004;
         public static final int frament_aboutimc=0x7f030005;
+        public static final int menu=0x7f030006;
     }
     public static final class menu {
         public static final int main=0x7f070000;
     }
     public static final class string {
+        public static final int AboutIMC=0x7f050008;
+        public static final int Home=0x7f050005;
+        public static final int Profile=0x7f050007;
         public static final int Tab1=0x7f050003;
         public static final int Tab2=0x7f050004;
+        public static final int TheBuzz=0x7f050006;
         public static final int action_settings=0x7f050002;
         public static final int app_name=0x7f050000;
         public static final int hello_world=0x7f050001;

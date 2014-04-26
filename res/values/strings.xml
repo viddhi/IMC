@@ -6,6 +6,10 @@
     <string name="action_settings">Settings</string>
       <string name="Tab1">Hot off the oven!</string>
     <string name="Tab2">Explore IMC</string>
+     <string name="Home">Home</string>
+    <string name="TheBuzz">The Buzz</string>
+     <string name="Profile">Profile</string>
+    <string name="AboutIMC">About IMC</string>
     
 
 </resources>
