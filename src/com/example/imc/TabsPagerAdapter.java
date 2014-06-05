@@ -16,14 +16,15 @@ public class TabsPagerAdapter extends FragmentPagerAdapter {
 		switch (index) {
 		case 0:			
 			return new HomeFragment();
+		
 		case 1:
-			return new ExploreIMCFragment();
-		case 2:
 			return new TheBuzzFragment();
-		case 3:
+		case 2:
 			return new ProfileFragment();
-		case 4:
+		case 3:
 			return new AboutIMCFragment();
+		case 4:
+			return new ExploreIMCFragment();
 		}
 
 		return null;

@@ -20,7 +20,7 @@ public class IMCPost {
 	}
 	public void setAuthor(String _author)
 	{
-		this.Content = _author;
+		this.Author = _author;
 	}
 	public String getContent(String _content)
 	{
@@ -59,6 +59,10 @@ public class IMCPost {
 	{
 		return _image;
 	}
+	public void setImage (String _image)
+	{
+		this.Image = _image;
+	}
 	public String getCommentCount(String _commentCount)
 	{
 			return _commentCount;
@@ -75,9 +79,7 @@ public class IMCPost {
 	{
 		this.LikeCount = _likeCount;
 	}
-	public void setImage (String _image){
-		this.Image = _image;
-	}
+	
 	public Spanned getExcerpt(Spanned _excerpt)
 	{
 		return _excerpt;

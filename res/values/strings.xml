@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">IMC</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">IMConnect</string>
     <string name="action_settings">Settings</string>
      <string name="Home">Home</string>
     <string name="TheBuzz">The Buzz</string>
      <string name="Profile">Profile</string>
     <string name="AboutIMC">About IMC</string>
     <string name="ExploreIMC">Explore IMC</string>
+    <string name="aboutTitle">Stay in touch!</string>
+    
+    <string name="aboutEmail">Email</string>
+    <string name="aboutFB">Facebook Icon</string>
+    <string name="aboutTwitter">Twitter Icon</string>
+    <string name="aboutLinkedIn">LinkedIn Icon</string>
+    <string name="aboutPinterest">Pinterest Icon</string>
+    
+    <string name="AvatarUrl">Content Description</string>
 
 </resources>

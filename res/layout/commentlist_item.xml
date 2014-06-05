@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+ 
+   <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  	xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp" >
+
+    <TextView
+        android:id="@+id/Commentor"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:layout_below="@+id/Comment"
+        android:layout_marginLeft="200dp"
+        android:textStyle="bold"
+        android:textColor="#66CC33" />
+    
+    <TextView
+        android:id="@+id/Comment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/Avatar"
+        android:textSize="14sp"   
+        android:textColor="#000" />
+    
+    <TextView
+        android:id="@+id/Avatar_Url"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+    
+    
+    <ImageView android:id="@+id/Avatar"
+        android:layout_width="50dp"
+        android:layout_height="50dp" 
+       
+        android:contentDescription="@string/AvatarUrl"/>
+    
+  
+ 
+</RelativeLayout>
