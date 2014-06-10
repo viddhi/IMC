@@ -1,6 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WebView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+<Button
+    android:id="@+id/btnPrev"
+     android:layout_height="wrap_content"
+     android:layout_width="wrap_content"
+     android:layout_gravity="right"
+     android:text="@string/Previous"
+     android:textSize="14sp" 
+     android:textColor="#FF6600"
+     android:onClick="GoBack" />
+<WebView
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:id="@+id/SinglePostView" >
+    android:id="@+id/SinglePostView" 
+    android:layout_below="@+id/btnPrev">
 </WebView>
+<View
+    android:layout_width="fill_parent"
+    android:layout_height="2dp"
+    android:background="@android:color/darker_gray"
+    android:layout_below="@+id/SinglePostView"/>
+</RelativeLayout>

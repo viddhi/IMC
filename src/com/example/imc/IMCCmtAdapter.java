@@ -42,18 +42,28 @@ public class IMCCmtAdapter extends BaseAdapter{
         if(convertView==null)
             vi = inflater.inflate(R.layout.commentlist_item, null);
  
-        TextView title = (TextView)vi.findViewById(R.id.Commentor); // title
-        TextView artist = (TextView)vi.findViewById(R.id.Comment); // artist name
-        TextView avatarurl = (TextView)vi.findViewById(R.id.Avatar_Url); // duration
-        ImageView thumb_image=(ImageView)vi.findViewById(R.id.Avatar); // thumb image
+        TextView title = (TextView)vi.findViewById(R.id.Commentor); 
+        TextView artist = (TextView)vi.findViewById(R.id.Comment); 
+        TextView fullContent = (TextView)vi.findViewById(R.id.FullContent); 
+        ImageView thumb_image=(ImageView)vi.findViewById(R.id.Avatar); 
+        TextView AvatarURL = (TextView)vi.findViewById(R.id.AvatarUrl); 
+        TextView PostID = (TextView)vi.findViewById(R.id.PostID); 
  
         HashMap<String, Object> cmt = new HashMap<String, Object>();
         cmt = data.get(position);
  
         // Setting all values in listview
         title.setText(cmt.get(ConstUtilities.Node_CmtName).toString());
-        artist.setText(cmt.get(ConstUtilities.Node_CmtContent).toString());
-        avatarurl.setText(cmt.get(ConstUtilities.Node_CmtAvatarUrl).toString());
+        String commentText = cmt.get(ConstUtilities.Node_CmtContent).toString();
+        if(commentText.length() > 200)
+        {
+        	commentText = commentText.substring(0, 200) + "...";
+        }
+        
+        artist.setText(commentText);
+        fullContent.setText(cmt.get(ConstUtilities.Node_CmtContent).toString());
+        AvatarURL.setText(cmt.get(ConstUtilities.Node_CmtAvatarUrl).toString());
+        PostID.setText(cmt.get(ConstUtilities.Node_PostID).toString());
         imageLoader.DisplayImage(cmt.get(ConstUtilities.Node_CmtAvatarUrl).toString(), thumb_image);
         return vi;
     }

@@ -10,7 +10,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import android.graphics.BitmapFactory;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -18,8 +18,10 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 
 public class TheBuzzFragment extends ListFragment {
@@ -41,7 +43,32 @@ public class TheBuzzFragment extends ListFragment {
 		return rootView;
 	}
 	
- 
+	@Override
+	  public void onActivityCreated(Bundle savedInstanceState) {
+	    super.onActivityCreated(savedInstanceState);
+	  
+	    ListView lv = getListView();
+		lv.setOnItemClickListener(new OnItemClickListener() {
+  	
+		@Override
+      public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3) {
+  		String CommentorName = ((TextView) arg1.findViewById(R.id.Commentor)).getText().toString();
+  		String Content = ((TextView) arg1.findViewById(R.id.FullContent)).getText().toString();
+  		String AvatarURL = ((TextView) arg1.findViewById(R.id.AvatarUrl)).getText().toString();
+  		String PostID = ((TextView) arg1.findViewById(R.id.PostID)).getText().toString();
+  		
+  		Intent in = new Intent(getActivity(),SingleCommentActivity.class);
+  		in.putExtra(ConstUtilities.Node_CmtName, CommentorName);
+  		in.putExtra(ConstUtilities.Node_CmtContent, Content);
+  		in.putExtra(ConstUtilities.Node_CmtAvatarUrl, AvatarURL);
+  		in.putExtra(ConstUtilities.Node_PostID, PostID);
+  		startActivity(in);
+  		
+  	}
+  	
+  });
+		
+	  }
 	
 	private class CallAPI extends AsyncTask<Void, Void, Void> {
 		@Override
@@ -74,7 +101,6 @@ public class TheBuzzFragment extends ListFragment {
 				    JSONObject authorObj  = singleObj.getJSONObject(ConstUtilities.Node_Author);
 				   _cmt.Commentor = Html.fromHtml(authorObj.getString(ConstUtilities.Node_CmtName).toString());
 				   _cmt.AvatarUrl = authorObj.getString(ConstUtilities.Node_CmtAvatarUrl).toString();
-				   _cmt.imgBitmap = BitmapFactory.decodeStream(new java.net.URL(_cmt.AvatarUrl).openStream()); 
 				   JSONObject postObj  = singleObj.getJSONObject(ConstUtilities.Node_CmtPosts);
 				   _cmt.PostID = Integer.parseInt(postObj.getString(ConstUtilities.Node_PostID));
 				  
@@ -82,7 +108,6 @@ public class TheBuzzFragment extends ListFragment {
 				    comment.put(ConstUtilities.Node_CmtContent, _cmt.Comment);
 				    comment.put(ConstUtilities.Node_CmtName, _cmt.Commentor);
 				    comment.put(ConstUtilities.Node_CmtAvatarUrl, _cmt.AvatarUrl);
-				    comment.put(ConstUtilities.Node_AvatarBitmap, _cmt.imgBitmap);
 				    comment.put(ConstUtilities.Node_PostID, _cmt.PostID);
 				   
 				    if(!(CommentType.equalsIgnoreCase("pingback")))

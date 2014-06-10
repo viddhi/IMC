@@ -15,11 +15,12 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:logo="@drawable/logo"
+		android:logo="@drawable/logo" 
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.Holo.Light">
+        android:theme="@style/Theme.Example">
         <activity
             android:name="com.example.imc.MainActivity"
+            android:logo="@drawable/logo"
             android:label="IMConnect">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,6 +29,10 @@
         </activity>
          <activity
             android:name="com.example.imc.SinglePostActivity"
+            android:label="" >
+        </activity> 
+        <activity
+            android:name="com.example.imc.SingleCommentActivity"
             android:label="" >
         </activity> 
     </application>

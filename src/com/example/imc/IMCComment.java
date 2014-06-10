@@ -1,12 +1,12 @@
 package com.example.imc;
-import android.graphics.Bitmap;
+
 import android.text.Spanned;
 public class IMCComment {
 	public Spanned Commentor;
 	public String AvatarUrl ;
 	public Spanned Comment;
 	public int PostID;
-	public Bitmap imgBitmap;
+	
 	
 	public Spanned getCommentor(Spanned _commentor)
 	{
@@ -37,14 +37,7 @@ public class IMCComment {
 	{
 		return _postID;
 	}
-	public void getimgBmp(Bitmap _imgBmp)
-	{
-		this.imgBitmap = _imgBmp;
-	}
-	public Bitmap setimgBmp(Bitmap _imgBmp)
-	{
-		return _imgBmp;
-	}
+
 	
 	
 }

@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 
 
 
+
 public class MainActivity extends FragmentActivity  implements
 ActionBar.TabListener {
 
@@ -17,7 +18,7 @@ private ViewPager viewPager;
 private TabsPagerAdapter mAdapter;
 private ActionBar actionBar;
 // Tab titles
-private String[] tabs = { "Home", "The Buzz", "Profile","About IMC","Explore IMC" };
+private String[] tabs = { "Home", "The Buzz", "Profile","About","Explore" };
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +28,14 @@ protected void onCreate(Bundle savedInstanceState) {
 	setContentView(R.layout.activity_main);
 	ActionBar actionbar2 = getActionBar();
 	actionbar2.setDisplayShowTitleEnabled(false);
+	
 	// Initilization
 	viewPager = (ViewPager) findViewById(R.id.pager);
 	actionBar = getActionBar();
 	mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 
 	viewPager.setAdapter(mAdapter);
-	actionBar.setHomeButtonEnabled(false);
+	actionBar.setHomeButtonEnabled(true);
 	
 	actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);		
 
@@ -54,7 +56,7 @@ protected void onCreate(Bundle savedInstanceState) {
 			// make respected tab selected
 			actionBar.setSelectedNavigationItem(position);
 		}
-
+		
 		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2) {
 		}

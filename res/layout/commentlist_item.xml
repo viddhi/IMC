@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
- 
-   <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
   	xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp" >
+    android:orientation="horizontal"
+    android:padding="10dp" >
 
     <TextView
         android:id="@+id/Commentor"
@@ -26,19 +23,31 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/Avatar"
         android:textSize="14sp"   
+        android:paddingLeft="15dp"
         android:textColor="#000" />
     
     <TextView
-        android:id="@+id/Avatar_Url"
+        android:id="@+id/FullContent"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+    
+    <TextView
+        android:id="@+id/AvatarUrl"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+    
+    <TextView
+        android:id="@+id/PostID"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"/>
     
     
     <ImageView android:id="@+id/Avatar"
-        android:layout_width="50dp"
-        android:layout_height="50dp" 
-       
+        android:layout_width="70dp"
+        android:layout_height="70dp" 
         android:contentDescription="@string/AvatarUrl"/>
     
   

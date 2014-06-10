@@ -17,5 +17,7 @@
     <string name="aboutPinterest">Pinterest Icon</string>
     
     <string name="AvatarUrl">Content Description</string>
+    <string name="Previous">Back To IMC Home</string>
+     <string name="GoToPost">Go To Post</string>
 
 </resources>
