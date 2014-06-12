@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 <Button
     android:id="@+id/btnPrev"
      android:layout_height="wrap_content"
@@ -14,13 +14,31 @@
      android:textSize="20sp" 
      android:textColor="#FF6600"
      android:onClick="GoBack" />
+<View
+    android:layout_width="fill_parent"
+    android:layout_height="1dp"
+    android:id="@+id/seperator"
+     android:layout_below="@+id/btnPrev"
+    android:background="@android:color/darker_gray"/>
+
+<Button
+    android:id="@+id/btnToPost"
+     android:layout_height="wrap_content"
+     android:layout_width="match_parent"
+     android:layout_below="@+id/seperator"
+     android:layout_alignParentRight="true"
+     android:layout_gravity="right"
+     android:background="@drawable/white_rectangle"
+     android:text="@string/GoToPost"
+     android:textSize="20sp" 
+     android:textColor="#FF6600" />
 
 
 <WebView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" 
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent" 
     android:id="@+id/SingleCommentView" 
-    android:layout_below="@+id/btnPrev">
+    android:layout_below="@+id/btnToPost">
 </WebView>
 
 </RelativeLayout>

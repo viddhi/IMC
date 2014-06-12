@@ -19,5 +19,8 @@
     <string name="AvatarUrl">Content Description</string>
     <string name="Previous">Back To IMC Home</string>
      <string name="GoToPost">Go To Post</string>
+     
+      <string name="Next">Next</string>
+       <string name="Prev">Previous</string>
 
 </resources>

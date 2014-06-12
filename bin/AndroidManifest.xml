@@ -35,6 +35,11 @@
             android:name="com.example.imc.SingleCommentActivity"
             android:label="" >
         </activity> 
+          <activity
+            android:name="com.example.imc.SingleCmtPostActivity"
+            android:label="" >
+           
+        </activity> 
     </application>
 
 </manifest>
