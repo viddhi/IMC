@@ -21,9 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -31,14 +29,15 @@ import android.widget.AdapterView.OnItemClickListener;
 public class HomeFragment extends ListFragment {
 	JSONArray posts = null;
 	//Array list of post lists
-	ArrayList<HashMap<String,Object>> postLists;
+	ListView list;
+	IMCPostAdapter adapter;
 	IMCPost _post = new IMCPost();
 	
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-		postLists = new ArrayList<HashMap<String,Object>>();
-		
+	
+		ConstUtilities.postLists =  new ArrayList<HashMap<String,Object>>();
 		View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 		new CallAPI().execute(); 
 		return rootView;
@@ -54,18 +53,9 @@ public class HomeFragment extends ListFragment {
 		@Override
         public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3) {
     		String PostID = ((TextView) arg1.findViewById(R.id.ID)).getText().toString();
-    		String Title = ((TextView) arg1.findViewById(R.id.Title)).getText().toString();
-    		String DatePosted = ((TextView) arg1.findViewById(R.id.DatePosted)).getText().toString();
-    		String Content = ((TextView)arg1.findViewById(R.id.Content)).getText().toString();
-    		String Author = ((TextView)arg1.findViewById(R.id.Author)).getText().toString();
-    		String Image = ((TextView)arg1.findViewById(R.id.FeaturedImage)).getText().toString();
     		Intent in = new Intent(getActivity(),SinglePostActivity.class);
     		in.putExtra(ConstUtilities.Node_ID, PostID);
-    		in.putExtra(ConstUtilities.Node_Title, Title);
-    		in.putExtra(ConstUtilities.Node_Date, DatePosted);
-    		in.putExtra(ConstUtilities.Node_Content, Content);
-    		in.putExtra(ConstUtilities.Node_Author, Author);
-    		in.putExtra(ConstUtilities.Node_Image, Image);
+    		in.putExtra(ConstUtilities.Position, String.valueOf(position));
     		startActivity(in);
     		
     	}
@@ -108,9 +98,19 @@ protected Void doInBackground(Void...arg0) {
     _post.CommentCount = "Comments: " + singleObj.getString(ConstUtilities.Node_CommentCnt);
     _post.dateposted = singleObj.getString(ConstUtilities.Node_Date);
     _post.Content = singleObj.getString(ConstUtilities.Node_Content);
+    _post.PostUrl = singleObj.getString(ConstUtilities.Node_PostUrl);
     JSONObject authorObj  = singleObj.getJSONObject(ConstUtilities.Node_Author);
     _post.Author = authorObj.getString("name").toString();
-   
+    String ZUrl = "http://www.indianmomsconnect.com/?json=get_zilla_likes&id=" + _post.PostID;
+    httpGet = new HttpGet(ZUrl);
+    
+    httpResponse = httpClient.execute(httpGet);
+    httpEntity = httpResponse.getEntity();
+    String response2 = EntityUtils.toString(httpEntity);
+    JSONObject jObj2 = new JSONObject(response2);
+    _post.ZillaLikeCnt = jObj2.getString("0").toString();
+    JSONObject jObj3 = new JSONObject( _post.ZillaLikeCnt);
+    _post.ZillaLikeCnt = jObj3.getString("meta_value").toString();
   
     HashMap<String,Object> post = new HashMap<String,Object>();
     post.put(ConstUtilities.Node_Title, _post.Title);
@@ -122,8 +122,10 @@ protected Void doInBackground(Void...arg0) {
     post.put(ConstUtilities.Node_Date, _post.dateposted);
     post.put(ConstUtilities.Node_Content, _post.Content);
     post.put(ConstUtilities.Node_Author,_post.Author);
+    post.put(ConstUtilities.Zilla_Like,  _post.ZillaLikeCnt);
+    post.put(ConstUtilities.Node_PostUrl,_post.PostUrl);
    
-    postLists.add(post);
+    ConstUtilities.postLists.add(post);
     }
    
     
@@ -141,11 +143,14 @@ protected Void doInBackground(Void...arg0) {
 
 protected void onPostExecute(Void result) {
 	super.onPostExecute(result);
-	ListAdapter adapter = new SimpleAdapter(getActivity(),postLists,
+	list = getListView();
+    adapter=new IMCPostAdapter(getActivity(), ConstUtilities.postLists);
+    list.setAdapter(adapter);
+	/*ListAdapter adapter = new SimpleAdapter(getActivity(),ConstUtilities.postLists,
 			R.layout.postlist_item,
 			new String[] {ConstUtilities.Node_Title,ConstUtilities.Node_Excerpt,ConstUtilities.Node_Image,ConstUtilities.Node_LikeCnt,ConstUtilities.Node_CommentCnt,ConstUtilities.Node_ID,ConstUtilities.Node_Date,ConstUtilities.Node_Content,ConstUtilities.Node_Author},
 			new int[] {R.id.Title,R.id.Excerpt,R.id.FeaturedImage,R.id.LikeCnt,R.id.CmtCnt,R.id.ID,R.id.DatePosted,R.id.Content,R.id.Author});
-	setListAdapter(adapter);
+	setListAdapter(adapter);*/
 	
 
 }

@@ -45,6 +45,43 @@ public class ServerUtility {
         
 		return NumOfPostsFound;
 	}
+	public static boolean setZillaLike(String PostID)
+	{
+		String URL = "http://www.indianmomsconnect.com/?json=set_zilla_likes&id=" + PostID;
+		try
+		{
+			//Strict mode
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		    StrictMode.setThreadPolicy(policy);
+		    
+			 DefaultHttpClient httpClient = new DefaultHttpClient();
+	         HttpEntity httpEntity = null;
+	         HttpResponse httpResponse = null;
+	         HttpGet httpGet = new HttpGet(URL);
+	         httpResponse = httpClient.execute(httpGet);
+	         httpEntity = httpResponse.getEntity();
+	         String response = EntityUtils.toString(httpEntity);
+         
+	         JSONObject jObj = new JSONObject(response);
+	         String Status = jObj.getString("status");
+	         if(Status.equalsIgnoreCase("ok"))
+	         {
+	        	 return true;
+	         }
+	         else
+	         {
+	        	 return false;
+	         }
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+			return false;
+			
+		}
+
+	}
+	
 	@SuppressWarnings("null")
 	public static ArrayList<HashMap<String,Object>> returnIMCPosts()
 	{

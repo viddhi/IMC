@@ -73,32 +73,36 @@ public final class R {
         public static final int white_rectangle=0x7f020030;
     }
     public static final class id {
-        public static final int Author=0x7f080016;
-        public static final int Avatar=0x7f08000b;
-        public static final int AvatarUrl=0x7f08000d;
-        public static final int CmtCnt=0x7f080017;
-        public static final int Comment=0x7f08000a;
-        public static final int Commentor=0x7f080009;
-        public static final int Content=0x7f080015;
-        public static final int DatePosted=0x7f080014;
-        public static final int Excerpt=0x7f080012;
-        public static final int FeaturedImage=0x7f080010;
-        public static final int FullContent=0x7f08000c;
-        public static final int ID=0x7f080013;
-        public static final int LikeCnt=0x7f080018;
-        public static final int PostID=0x7f08000e;
+        public static final int Author=0x7f080019;
+        public static final int Avatar=0x7f08000e;
+        public static final int AvatarUrl=0x7f080010;
+        public static final int CmtCnt=0x7f08001b;
+        public static final int Comment=0x7f08000d;
+        public static final int Commentor=0x7f08000c;
+        public static final int Content=0x7f080018;
+        public static final int DatePosted=0x7f080017;
+        public static final int Excerpt=0x7f080015;
+        public static final int FeaturedImage=0x7f080013;
+        public static final int FullContent=0x7f08000f;
+        public static final int ID=0x7f080016;
+        public static final int LikeCnt=0x7f08001c;
+        public static final int PostID=0x7f080011;
+        public static final int PostImg=0x7f08001a;
         public static final int SingleCommentView=0x7f080005;
         public static final int SinglePostView=0x7f080002;
-        public static final int Title=0x7f080011;
-        public static final int aboutIMCView=0x7f08000f;
-        public static final int action_settings=0x7f080019;
-        public static final int btnNext=0x7f080006;
+        public static final int Title=0x7f080014;
+        public static final int aboutIMCView=0x7f080012;
+        public static final int action_settings=0x7f08001d;
+        public static final int btnLike=0x7f080008;
+        public static final int btnNext=0x7f080009;
         public static final int btnPrev=0x7f080001;
-        public static final int btnPrevious=0x7f080007;
+        public static final int btnPrevious=0x7f08000a;
         public static final int btnToPost=0x7f080004;
+        public static final int btnshare=0x7f080006;
         public static final int pager=0x7f080000;
         public static final int seperator=0x7f080003;
-        public static final int seperator2=0x7f080008;
+        public static final int seperator2=0x7f08000b;
+        public static final int txtLikeCnt=0x7f080007;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -136,6 +140,8 @@ public final class R {
         public static final int aboutTwitter=0x7f05000a;
         public static final int action_settings=0x7f050001;
         public static final int app_name=0x7f050000;
+        public static final int like=0x7f050012;
+        public static final int share=0x7f050013;
     }
     public static final class style {
         public static final int ActionBar_Solid_Example=0x7f060003;

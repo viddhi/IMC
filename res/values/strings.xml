@@ -22,5 +22,7 @@
      
       <string name="Next">Next</string>
        <string name="Prev">Previous</string>
+       <string name="like">Zilla Like</string>
+       <string name="share">Share</string>
 
 </resources>

@@ -13,6 +13,26 @@ public class IMCPost {
 	public String dateposted;
 	public String Content;
 	public String Author;
+	public String ZillaLikeCnt;
+	public String PostUrl;
+	
+	public String getPostUrl(String _postUrl)
+	{
+		return _postUrl;
+	}
+	public void setPostUrl(String _postUrl)
+	{
+		this.ZillaLikeCnt = _postUrl;
+	}
+	
+	public String getZillaLikeCnt(String _zilla)
+	{
+		return _zilla;
+	}
+	public void setZillaLikeCnt(String _zilla)
+	{
+		this.ZillaLikeCnt = _zilla;
+	}
 	
 	public String getAuthor(String _author)
 	{
