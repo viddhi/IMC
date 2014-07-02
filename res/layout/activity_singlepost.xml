@@ -24,13 +24,31 @@
   <RelativeLayout 
     android:layout_width="fill_parent" android:layout_height="fill_parent" 
     android:gravity="fill">
+    <TextView android:id="@+id/txtCmtCnt"
+          android:layout_width="20dp"
+         android:layout_height="wrap_content"
+         android:singleLine="true" 
+         android:textSize="24sp" 
+         android:layout_marginRight="55dp" 
+         android:layout_alignParentRight="true" />
+     <ImageView android:id="@+id/btnCmt"
+         android:src="@drawable/ic_action_chat"
+        android:layout_width="60dp" 
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/txtCmtCnt"
+        android:contentDescription="@string/like"
+        android:singleLine="true" 
+         android:layout_marginRight="60dp" 
+        android:layout_alignParentRight="true"/> 
+      
+      
      <ImageView android:id="@+id/btnshare"
          android:src="@drawable/ic_action_share"
          android:layout_width="60dp"
          android:layout_height="wrap_content"
          android:contentDescription="@string/share"
          android:singleLine="true" 
-          android:layout_marginRight="60dp" 
+          android:layout_marginRight="130dp" 
          android:layout_alignParentRight="true" /> 
         <TextView android:id="@+id/txtLikeCnt"
           android:layout_width="20dp"
@@ -38,7 +56,7 @@
           android:layout_toLeftOf="@id/btnshare"
          android:singleLine="true" 
          android:textSize="24sp" 
-         android:layout_marginRight="180dp" 
+         android:layout_marginRight="200dp" 
          android:layout_alignParentRight="true" />
      <ImageView android:id="@+id/btnLike"
          android:src="@drawable/ic_action_favorite"
@@ -47,7 +65,7 @@
         android:layout_toLeftOf="@id/txtLikeCnt"
         android:contentDescription="@string/like"
         android:singleLine="true" 
-         android:layout_marginRight="180dp" 
+         android:layout_marginRight="200dp" 
         android:layout_alignParentRight="true"/> 
      <ImageView android:id="@+id/btnNext"
          android:src="@drawable/ic_action_next_item"
@@ -55,7 +73,7 @@
          android:layout_width="60dp"
          android:layout_toLeftOf="@id/btnLike"
         android:layout_height="wrap_content"
-         android:layout_marginRight="240dp" 
+         android:layout_marginRight="250dp" 
         android:singleLine="true" android:layout_alignParentRight="true"  />
     <ImageView android:id="@+id/btnPrevious"
          android:src="@drawable/ic_action_previous_item"
@@ -71,7 +89,7 @@
     
         <View
     android:layout_width="fill_parent"
-    android:layout_height="3dp"
+    android:layout_height="1dp"
     android:id="@+id/seperator2"
     android:background="#FF6600"/>
 

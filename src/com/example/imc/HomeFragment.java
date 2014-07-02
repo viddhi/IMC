@@ -13,15 +13,17 @@ import org.json.JSONObject;
 
 import android.support.v4.app.ListFragment;
 import android.text.Html;
-import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+//import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+//import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -35,11 +37,14 @@ public class HomeFragment extends ListFragment {
 	
 	
 	@Override
-	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-	
+	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState)
+	{
+		
 		ConstUtilities.postLists =  new ArrayList<HashMap<String,Object>>();
 		View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-		new CallAPI().execute(); 
+		
+		 new CallAPI().execute(); 
+		
 		return rootView;
   
 }
@@ -49,7 +54,6 @@ public class HomeFragment extends ListFragment {
 	  
 	    ListView lv = getListView();
 		lv.setOnItemClickListener(new OnItemClickListener() {
-    	@SuppressLint("SimpleDateFormat")
 		@Override
         public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3) {
     		String PostID = ((TextView) arg1.findViewById(R.id.ID)).getText().toString();
@@ -65,6 +69,14 @@ public class HomeFragment extends ListFragment {
 	  }
 
 private class CallAPI extends AsyncTask<Void, Void, Void> {
+	ProgressDialog Asycdialog = new ProgressDialog(getActivity());
+	 @Override
+     protected void onPreExecute() {
+
+         super.onPreExecute();
+         Asycdialog.setMessage("Loading...");
+         Asycdialog.show();
+     }
 @Override
 protected Void doInBackground(Void...arg0) {
 	try
@@ -93,7 +105,7 @@ protected Void doInBackground(Void...arg0) {
     excerptData = UtilFunctions.stringCleanup(excerptData);
     _post.Excerpt = Html.fromHtml(Html.fromHtml((String) excerptData).toString());
     _post.Image = singleObj.getString(ConstUtilities.Node_Image).toString();
-    _post.LikeCount = "Likes: " + singleObj.getString(ConstUtilities.Node_LikeCnt);
+    
     _post.PostID = singleObj.getString(ConstUtilities.Node_ID);
     _post.CommentCount = "Comments: " + singleObj.getString(ConstUtilities.Node_CommentCnt);
     _post.dateposted = singleObj.getString(ConstUtilities.Node_Date);
@@ -111,6 +123,7 @@ protected Void doInBackground(Void...arg0) {
     _post.ZillaLikeCnt = jObj2.getString("0").toString();
     JSONObject jObj3 = new JSONObject( _post.ZillaLikeCnt);
     _post.ZillaLikeCnt = jObj3.getString("meta_value").toString();
+    _post.LikeCount = "Likes: " +  _post.ZillaLikeCnt;
   
     HashMap<String,Object> post = new HashMap<String,Object>();
     post.put(ConstUtilities.Node_Title, _post.Title);
@@ -140,17 +153,14 @@ protected Void doInBackground(Void...arg0) {
 	
 }
 
-
+@Override
 protected void onPostExecute(Void result) {
 	super.onPostExecute(result);
 	list = getListView();
     adapter=new IMCPostAdapter(getActivity(), ConstUtilities.postLists);
     list.setAdapter(adapter);
-	/*ListAdapter adapter = new SimpleAdapter(getActivity(),ConstUtilities.postLists,
-			R.layout.postlist_item,
-			new String[] {ConstUtilities.Node_Title,ConstUtilities.Node_Excerpt,ConstUtilities.Node_Image,ConstUtilities.Node_LikeCnt,ConstUtilities.Node_CommentCnt,ConstUtilities.Node_ID,ConstUtilities.Node_Date,ConstUtilities.Node_Content,ConstUtilities.Node_Author},
-			new int[] {R.id.Title,R.id.Excerpt,R.id.FeaturedImage,R.id.LikeCnt,R.id.CmtCnt,R.id.ID,R.id.DatePosted,R.id.Content,R.id.Author});
-	setListAdapter(adapter);*/
+    super.onPostExecute(result);
+    Asycdialog.dismiss();
 	
 
 }

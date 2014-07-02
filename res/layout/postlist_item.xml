@@ -1,63 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
- 
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp" >
-
-    <TextView
-        android:id="@+id/FeaturedImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
+    android:layout_height="wrap_content">
+    
+  <LinearLayout  
+      android:id="@+id/LeftLayout"
+      android:layout_width="260dp" android:layout_height="200dp" 
+      android:orientation="vertical"
+      android:ellipsize="end"
+    android:singleLine="true" android:layout_alignParentRight="true"
+    android:gravity="fill">
    
     <TextView
         android:id="@+id/Title"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="#66CC33" />
-    
-    <TextView
+     <TextView
         android:id="@+id/Excerpt"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+         android:layout_width="wrap_content" 
+         android:layout_height="wrap_content"
         android:textSize="14sp"   
         android:textColor="#000" />
-    
-    <TextView android:id="@+id/ID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
-    
-    <TextView android:id="@+id/DatePosted"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
-    
-     <TextView android:id="@+id/Content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
      
-       <TextView android:id="@+id/Author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
-       
-     <ImageView android:id="@+id/PostImg"
-        android:layout_width="70dp"
-        android:layout_height="70dp" 
-        android:contentDescription="@string/AvatarUrl"/>
-    
-    <RelativeLayout 
-    android:layout_width="fill_parent" android:layout_height="fill_parent" 
-    android:gravity="fill">
+     <RelativeLayout 
+	    android:layout_width="fill_parent" android:layout_height="fill_parent" 
+	    android:gravity="fill">
      <TextView android:id="@+id/CmtCnt"
         android:layout_width="60dp" android:layout_height="wrap_content"
         android:singleLine="true" android:layout_alignParentRight="true"  android:textSize="12sp"   
@@ -66,12 +37,21 @@
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_marginRight="60dp" android:layout_toLeftOf="@id/CmtCnt"
         android:singleLine="true" android:ellipsize="end"  android:textSize="12sp"   
-        android:textColor="#FF6600"  />   
-       
-</RelativeLayout>
-    
-    
-    
-
- 
+        android:textColor="#FF6600"  />       
+	</RelativeLayout>
 </LinearLayout>
+    
+  <ImageView android:id="@+id/PostImg"
+        android:layout_width="100dp"
+        android:layout_height="100dp" 
+        android:layout_marginRight="10dp"
+        android:singleLine="true" 
+        android:layout_toLeftOf="@+id/LeftLayout"
+        android:contentDescription="@string/AvatarUrl"/>
+    
+    <TextView android:id="@+id/ID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+ 
+</RelativeLayout>

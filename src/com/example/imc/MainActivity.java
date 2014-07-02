@@ -11,6 +11,7 @@ import android.support.v4.view.ViewPager;
 
 
 
+
 public class MainActivity extends FragmentActivity  implements
 ActionBar.TabListener {
 
@@ -18,7 +19,7 @@ private ViewPager viewPager;
 private TabsPagerAdapter mAdapter;
 private ActionBar actionBar;
 // Tab titles
-private String[] tabs = { "Home", "The Buzz", "Profile","About","Explore" };
+private String[] tabs = { "Home","Buzz","About","Explore" };
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +27,6 @@ protected void onCreate(Bundle savedInstanceState) {
 	
 	
 	setContentView(R.layout.activity_main);
-	ActionBar actionbar2 = getActionBar();
-	actionbar2.setDisplayShowTitleEnabled(false);
 	
 	// Initilization
 	viewPager = (ViewPager) findViewById(R.id.pager);
@@ -38,7 +37,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	actionBar.setHomeButtonEnabled(true);
 	
 	actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);		
-
+	actionBar.setDisplayShowTitleEnabled(false);
 	// Adding Tabs
 	for (String tab_name : tabs) {
 		actionBar.addTab(actionBar.newTab().setText(tab_name)
@@ -66,6 +65,8 @@ protected void onCreate(Bundle savedInstanceState) {
 		}
 	});
 }
+
+
 
 @Override
 public void onTabReselected(Tab tab, FragmentTransaction ft) {

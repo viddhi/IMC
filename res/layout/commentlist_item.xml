@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:textSize="22sp"
         android:layout_below="@+id/Comment"
-        android:layout_marginLeft="200dp"
+        android:layout_marginLeft="198dp"
         android:textStyle="bold"
         android:textColor="#66CC33" />
     

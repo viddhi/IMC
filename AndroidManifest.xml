@@ -20,7 +20,7 @@
         android:theme="@style/Theme.Example">
         <activity
             android:name="com.example.imc.MainActivity"
-            android:logo="@drawable/logo"
+            android:logo="@drawable/imclogo"
             android:label="IMConnect">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,6 +37,11 @@
         </activity> 
           <activity
             android:name="com.example.imc.SingleCmtPostActivity"
+            android:label="" >
+           
+        </activity> 
+          <activity
+            android:name="com.example.imc.CommentActivity"
             android:label="" >
            
         </activity> 

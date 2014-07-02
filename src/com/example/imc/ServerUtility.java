@@ -1,10 +1,13 @@
 package com.example.imc;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
@@ -59,6 +62,54 @@ public class ServerUtility {
 	         HttpResponse httpResponse = null;
 	         HttpGet httpGet = new HttpGet(URL);
 	         httpResponse = httpClient.execute(httpGet);
+	       
+	         httpEntity = httpResponse.getEntity();
+	         String response = EntityUtils.toString(httpEntity);
+         
+	         JSONObject jObj = new JSONObject(response);
+	         String Status = jObj.getString("status");
+	         if(Status.equalsIgnoreCase("ok"))
+	         {
+	        	 return true;
+	         }
+	         else
+	         {
+	        	 return false;
+	         }
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+			return false;
+			
+		}
+
+	}
+	
+	public static boolean postComment(String PostID,String UserName,String UserEmail,String Comment)
+	{
+		try {
+			UserName = URLEncoder.encode(UserName, "utf-8");
+			UserEmail = URLEncoder.encode(UserEmail, "utf-8");
+			Comment = URLEncoder.encode(Comment, "utf-8");
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String URL = "http://www.indianmomsconnect.com/api/submit_comment?post_id=" + PostID + "&name=" + UserName + "&email=" + UserEmail + "&content=" + Comment;
+		try
+		{
+			//Strict mode
+			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+		    StrictMode.setThreadPolicy(policy);
+		    
+			 DefaultHttpClient httpClient = new DefaultHttpClient();
+	         HttpEntity httpEntity = null;
+	         HttpResponse httpResponse = null;
+	         HttpPut httpput = new HttpPut(URL);
+	         httpResponse = httpClient.execute(httpput);
 	         httpEntity = httpResponse.getEntity();
 	         String response = EntityUtils.toString(httpEntity);
          

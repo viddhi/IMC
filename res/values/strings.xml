@@ -24,5 +24,14 @@
        <string name="Prev">Previous</string>
        <string name="like">Zilla Like</string>
        <string name="share">Share</string>
+       <string name="bHeader">The Buzz</string>
+       <string name="bLink">Share Your Thoughts</string>
+       
+       <string name="feedbackname">Name</string>
+        <string name="feedbackemail">Email</string>
+         <string name="feedbackbody">Comment</string>
+          <string name="feedbackbutton">Submit Comment</string>
+           <string name="Cancelbutton">Cancel</string>
+           
 
 </resources>

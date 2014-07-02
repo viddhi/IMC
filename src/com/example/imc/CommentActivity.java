@@ -11,71 +11,89 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import android.app.Dialog;
+import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.text.Html;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
+import android.view.Window;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
 
-
-public class TheBuzzFragment extends ListFragment {
+public class CommentActivity  extends ListActivity {
 	JSONArray comments = null;
 	//Array list of comments 
 	ArrayList<HashMap<String,Object>> commentList;
 	IMCComment _cmt = new IMCComment();
 	ListView list;
 	IMCCmtAdapter adapter;
+	Dialog myDialog = null;
 	View rootView;
-	
-	
-	@Override
-	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
-		commentList = new ArrayList<HashMap<String,Object>>();
-		 rootView = inflater.inflate(R.layout.fragment_thebuzz, container, false);
-		 if(commentList.size() == 0)
-		 {
-		new CallAPI().execute();
-		 }
-		return rootView;
+	String PostID = null;
+	public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+        getActionBar().hide();
+        setContentView(R.layout.activity_comment);
+        commentList = new ArrayList<HashMap<String,Object>>();
+        list = getListView();
+        Intent in = getIntent();
+        PostID = in.getStringExtra("CommentPostID");
+        TextView txtView1=(TextView)findViewById(R.id.shareLink);
+        txtView1.setOnClickListener(new OnClickListener() {
+        	public void onClick(View v) {
+        		callCommentDialog();
+                    }
+        });
+        new CallAPI().execute();
 	}
 	
-	@Override
-	  public void onActivityCreated(Bundle savedInstanceState) {
-	    super.onActivityCreated(savedInstanceState);
-	  
-	    ListView lv = getListView();
-		lv.setOnItemClickListener(new OnItemClickListener() {
-  	
-		@Override
-      public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3) {
-  		String CommentorName = ((TextView) arg1.findViewById(R.id.Commentor)).getText().toString();
-  		String Content = ((TextView) arg1.findViewById(R.id.FullContent)).getText().toString();
-  		String AvatarURL = ((TextView) arg1.findViewById(R.id.AvatarUrl)).getText().toString();
-  		String PostID = ((TextView) arg1.findViewById(R.id.PostID)).getText().toString();
-  		
-  		Intent in = new Intent(getActivity(),SingleCommentActivity.class);
-  		in.putExtra(ConstUtilities.Node_CmtName, CommentorName);
-  		in.putExtra(ConstUtilities.Node_CmtContent, Content);
-  		in.putExtra(ConstUtilities.Node_CmtAvatarUrl, AvatarURL);
-  		in.putExtra(ConstUtilities.Node_PostID, PostID);
-  		startActivity(in);
-  		
-  	}
-  	
-  });
-		
-	  }
-	
+	private void callCommentDialog() 
+    {
+         myDialog = new Dialog(this);
+        myDialog.setContentView(R.layout.activity_submitcmt);
+        myDialog.setCancelable(true);
+        myDialog.setTitle( "Share your thoughts" );
+        Button submit = (Button) myDialog.findViewById(R.id.ButtonSendFeedback);
+
+         myDialog.show();
+
+         submit.setOnClickListener(new OnClickListener()
+        {
+
+           @Override
+           public void onClick(View v)
+           {
+        	   EditText emailaddr = (EditText) myDialog.findViewById(R.id.EditTextEmail);
+               EditText username = (EditText) myDialog.findViewById(R.id.EditTextName);
+               EditText message = (EditText) myDialog.findViewById(R.id.EditTextFeedbackBody);
+               boolean status = ServerUtility.postComment(PostID, username.getText().toString(), emailaddr.getText().toString(), message.getText().toString());
+               if(status)
+               {
+            	   Toast.makeText(getApplicationContext(), "Thank you adding your thoughts! Your comment is pending and will be approved by the admin soon", Toast.LENGTH_LONG).show();
+            	   myDialog.dismiss();
+
+               }
+               else
+               {
+            	   Toast.makeText(getApplicationContext(), "Thank you adding your thoughts! Your comment is pending and will be approved by the admin soon", Toast.LENGTH_LONG).show();
+            	   myDialog.dismiss();
+               }
+           }
+       });
+       
+
+    }
+
 	private class CallAPI extends AsyncTask<Void, Void, Void> {
-		ProgressDialog Asycdialog = new ProgressDialog(getActivity());
+		ProgressDialog Asycdialog = new ProgressDialog(CommentActivity.this);
 		 @Override
 	     protected void onPreExecute() {
 
@@ -87,11 +105,11 @@ public class TheBuzzFragment extends ListFragment {
 		protected Void doInBackground(Void...arg0) {
 			try
 			{
-			
+			String URL = "https://public-api.wordpress.com/rest/v1/sites/www.indianmomsconnect.com/posts/" + PostID + "/replies?pretty=1";
 		    DefaultHttpClient httpClient = new DefaultHttpClient();
 		    HttpEntity httpEntity = null;
 		    HttpResponse httpResponse = null;
-		    HttpGet httpGet = new HttpGet(ConstUtilities.getComments);
+		    HttpGet httpGet = new HttpGet(URL);
 		    
 		    httpResponse = httpClient.execute(httpGet);
 		    httpEntity = httpResponse.getEntity();
@@ -105,7 +123,7 @@ public class TheBuzzFragment extends ListFragment {
 				    JSONObject singleObj = comments.getJSONObject(i);
 				    
 				    String tempContent = singleObj.getString(ConstUtilities.Node_CmtContent);
-				    //tempContent = tempContent.split("\n")[0];
+				    tempContent = tempContent.split("\n")[0];
 				    tempContent = UtilFunctions.stringCleanup(tempContent);
 				    _cmt.Comment = Html.fromHtml(Html.fromHtml((String) tempContent).toString());
 				    String CommentType = singleObj.getString(ConstUtilities.Node_CmtType);
@@ -142,8 +160,8 @@ public class TheBuzzFragment extends ListFragment {
 		}
 		protected void onPostExecute(Void result) {
 			super.onPostExecute(result);
-			list = getListView();
-	        adapter=new IMCCmtAdapter(getActivity(), commentList);
+			
+	        adapter=new IMCCmtAdapter(CommentActivity.this, commentList);
 	        list.setAdapter(adapter);
 	        Asycdialog.dismiss();
 			        

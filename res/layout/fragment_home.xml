@@ -7,6 +7,20 @@
     android:padding="10dp"
     android:paddingLeft="10dp"
     android:paddingRight="10dp" >
+   <!--   <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="100dp"
+        android:indeterminate="false"
+        android:max="150"
+        android:minHeight="50dp"
+        android:minWidth="200dp"
+        android:progress="1" /> -->
     <ListView
         android:id = "@android:id/list"
         android:layout_width="fill_parent"
