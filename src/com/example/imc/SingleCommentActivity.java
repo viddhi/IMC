@@ -3,6 +3,7 @@ package com.example.imc;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Html;
 import android.text.Spanned;
@@ -16,13 +17,18 @@ import android.widget.Button;
 @SuppressLint("JavascriptInterface")
 public class SingleCommentActivity extends Activity {
 	String PostID = null;
+	public Typeface face;
 	@SuppressLint({ "DefaultLocale", "SetJavaScriptEnabled" })
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
         getActionBar().hide();
         setContentView(R.layout.activity_singlecomment);
+        face=Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf"); 
+        Button btnback=(Button)findViewById(R.id.btnPrev);
+        btnback.setTypeface(face);
         Button Tbutun=(Button)findViewById(R.id.btnToPost);
+        Tbutun.setTypeface(face);
         Tbutun.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
         		    	    

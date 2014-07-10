@@ -6,11 +6,12 @@
     android:orientation="vertical">
 <Button
     android:id="@+id/btnPrev"
-     android:layout_height="wrap_content"
+      android:layout_height="wrap_content"
      android:layout_width="wrap_content"
      android:layout_gravity="right"
      android:text="@string/Previous"
-     android:textSize="14sp" 
+     android:background="@drawable/rounded_rectangle"
+     android:textSize="20sp" 
      android:textColor="#FF6600"
      android:onClick="GoBack" />
 <WebView

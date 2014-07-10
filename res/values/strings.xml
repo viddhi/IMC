@@ -25,13 +25,18 @@
        <string name="like">Zilla Like</string>
        <string name="share">Share</string>
        <string name="bHeader">The Buzz</string>
-       <string name="bLink">Share Your Thoughts</string>
+       <string name="bLink">Click Here to Share Your Thoughts</string>
        
        <string name="feedbackname">Name</string>
         <string name="feedbackemail">Email</string>
          <string name="feedbackbody">Comment</string>
           <string name="feedbackbutton">Submit Comment</string>
            <string name="Cancelbutton">Cancel</string>
+           
+           <string name="ThankYouMsg">Thank You</string>
+           <string name="LikeMsg">Thank you for liking the post! Would you like to share it with your friends?</string>
+           <string name="btnCancel">Cancel</string>
+           <string name="btnShare">Share</string>
            
 
 </resources>

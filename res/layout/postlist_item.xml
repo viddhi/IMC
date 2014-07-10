@@ -6,8 +6,9 @@
     
   <LinearLayout  
       android:id="@+id/LeftLayout"
-      android:layout_width="260dp" android:layout_height="200dp" 
+      android:layout_width="260dp" android:layout_height="180dp" 
       android:orientation="vertical"
+      android:layout_marginTop="20dp"
       android:ellipsize="end"
     android:singleLine="true" android:layout_alignParentRight="true"
     android:gravity="fill">
@@ -30,12 +31,12 @@
 	    android:layout_width="fill_parent" android:layout_height="fill_parent" 
 	    android:gravity="fill">
      <TextView android:id="@+id/CmtCnt"
-        android:layout_width="60dp" android:layout_height="wrap_content"
+        android:layout_width="70dp" android:layout_height="wrap_content"
         android:singleLine="true" android:layout_alignParentRight="true"  android:textSize="12sp"   
         android:textColor="#FF6600" />
     <TextView android:id="@+id/LikeCnt"
         android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_marginRight="60dp" android:layout_toLeftOf="@id/CmtCnt"
+        android:layout_marginRight="50dp" android:layout_toLeftOf="@id/CmtCnt"
         android:singleLine="true" android:ellipsize="end"  android:textSize="12sp"   
         android:textColor="#FF6600"  />       
 	</RelativeLayout>

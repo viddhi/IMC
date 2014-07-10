@@ -15,17 +15,21 @@ import android.app.Dialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class CommentActivity  extends ListActivity {
 	JSONArray comments = null;
@@ -37,6 +41,7 @@ public class CommentActivity  extends ListActivity {
 	Dialog myDialog = null;
 	View rootView;
 	String PostID = null;
+	 public Typeface face;
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
@@ -44,25 +49,65 @@ public class CommentActivity  extends ListActivity {
         setContentView(R.layout.activity_comment);
         commentList = new ArrayList<HashMap<String,Object>>();
         list = getListView();
+        face=Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf"); 
         Intent in = getIntent();
         PostID = in.getStringExtra("CommentPostID");
+        
+        
+        list.setOnItemClickListener(new OnItemClickListener() {
+  	
+		@Override
+      public void onItemClick(AdapterView<?> arg0, View arg1,int position, long arg3) {
+  		String CommentorName = ((TextView) arg1.findViewById(R.id.Commentor)).getText().toString();
+  		String Content = ((TextView) arg1.findViewById(R.id.FullContent)).getText().toString();
+  		String AvatarURL = ((TextView) arg1.findViewById(R.id.AvatarUrl)).getText().toString();
+  		String PostID = ((TextView) arg1.findViewById(R.id.PostID)).getText().toString();
+  		
+  		Intent in = new Intent(getApplicationContext(),SingleCommentActivity.class);
+  		in.putExtra(ConstUtilities.Node_CmtName, CommentorName);
+  		in.putExtra(ConstUtilities.Node_CmtContent, Content);
+  		in.putExtra(ConstUtilities.Node_CmtAvatarUrl, AvatarURL);
+  		in.putExtra(ConstUtilities.Node_PostID, PostID);
+  		startActivity(in);
+  		
+  	}
+  	
+  });
+        
+        //Share link on click
         TextView txtView1=(TextView)findViewById(R.id.shareLink);
+        txtView1.setTypeface(face);
         txtView1.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
         		callCommentDialog();
                     }
         });
+        //Buzz on click
+        face=Typeface.createFromAsset(getAssets(), "Roboto-Black.ttf"); 
+        TextView txtView2=(TextView)findViewById(R.id.Header);
+        txtView2.setTypeface(face);
+        txtView2.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+        txtView2.setOnClickListener(new OnClickListener() {
+        	public void onClick(View v) {
+        		finish();
+        	}
+        });
+        
         new CallAPI().execute();
 	}
 	
 	private void callCommentDialog() 
     {
-         myDialog = new Dialog(this);
+        myDialog = new Dialog(this);
         myDialog.setContentView(R.layout.activity_submitcmt);
         myDialog.setCancelable(true);
+        ((TextView)myDialog.findViewById(R.id.EditTextEmail)).setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf"));
+        ((TextView)myDialog.findViewById(R.id.EditTextName)).setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf"));
+        ((TextView)myDialog.findViewById(R.id.EditTextFeedbackBody)).setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf"));
         myDialog.setTitle( "Share your thoughts" );
+        ((TextView)myDialog.findViewById(android.R.id.title)).setTypeface(Typeface.createFromAsset(getAssets(),"Roboto-Black.ttf"));
         Button submit = (Button) myDialog.findViewById(R.id.ButtonSendFeedback);
-
+        submit.setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf"));
          myDialog.show();
 
          submit.setOnClickListener(new OnClickListener()

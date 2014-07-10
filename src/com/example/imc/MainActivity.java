@@ -4,9 +4,12 @@ package com.example.imc;
 import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
+import android.widget.TextView;
 
 
 
@@ -38,9 +41,14 @@ protected void onCreate(Bundle savedInstanceState) {
 	
 	actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);		
 	actionBar.setDisplayShowTitleEnabled(false);
+	Typeface face=Typeface.createFromAsset(getAssets(), "Roboto-Black.ttf"); 
 	// Adding Tabs
 	for (String tab_name : tabs) {
-		actionBar.addTab(actionBar.newTab().setText(tab_name)
+		TextView t = new TextView(this);
+	    t.setText("\n" + tab_name);
+	    t.setTypeface(face);
+	    t.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);	    
+		actionBar.addTab(actionBar.newTab().setCustomView(t)
 				.setTabListener(this));
 	}
 

@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,11 +19,13 @@ public class IMCPostAdapter extends BaseAdapter{
     private ArrayList<HashMap<String,Object>> data;
     private static LayoutInflater inflater=null;
     public ImageLoader imageLoader; 
+    public Typeface face;
  
     public IMCPostAdapter(Activity a, ArrayList<HashMap<String,Object>> d) {
         activity = a;
         data=d;
         inflater = (LayoutInflater)activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        face=Typeface.createFromAsset(a.getAssets(), "Roboto-Light.ttf"); 
         imageLoader=new ImageLoader(activity.getApplicationContext());
     }
  
@@ -45,12 +48,7 @@ public class IMCPostAdapter extends BaseAdapter{
  
         TextView title = (TextView)vi.findViewById(R.id.Title); 
         TextView excerpt = (TextView)vi.findViewById(R.id.Excerpt); 
-      //  TextView featuredImg = (TextView)vi.findViewById(R.id.FeaturedImage); 
         TextView PostID = (TextView)vi.findViewById(R.id.ID); 
-      //  TextView DatePosted = (TextView)vi.findViewById(R.id.DatePosted); 
-       // TextView Content = (TextView)vi.findViewById(R.id.Content); 
-        
-      //  TextView Author = (TextView)vi.findViewById(R.id.Author); 
         ImageView thumb_image=(ImageView)vi.findViewById(R.id.PostImg); 
         TextView CmtCnt = (TextView)vi.findViewById(R.id.CmtCnt); 
         TextView LikeCnt = (TextView)vi.findViewById(R.id.LikeCnt); 
@@ -61,15 +59,14 @@ public class IMCPostAdapter extends BaseAdapter{
         // Setting all values in listview
         title.setText(post.get(ConstUtilities.Node_Title).toString());
         excerpt.setText(post.get(ConstUtilities.Node_Excerpt).toString());
-       // featuredImg.setText(post.get(ConstUtilities.Node_Image).toString());
         PostID.setText(post.get(ConstUtilities.Node_ID).toString());
-      //  DatePosted.setText(post.get(ConstUtilities.Node_Date).toString());
-        
-      //  Content.setText(post.get(ConstUtilities.Node_Content).toString());
-     //   Author.setText(post.get(ConstUtilities.Node_Author).toString());
         CmtCnt.setText(post.get(ConstUtilities.Node_CommentCnt).toString());
         LikeCnt.setText(post.get(ConstUtilities.Node_LikeCnt).toString());
-        
+        //Setting up font
+        title.setTypeface(face);
+        excerpt.setTypeface(face);
+        CmtCnt.setTypeface(face);
+        LikeCnt.setTypeface(face);
         imageLoader.DisplayImage(post.get(ConstUtilities.Node_Image).toString(), thumb_image);
         return vi;
     }
