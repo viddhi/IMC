@@ -17,13 +17,11 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-//import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-//import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -42,9 +40,7 @@ public class HomeFragment extends ListFragment {
 		
 		ConstUtilities.postLists =  new ArrayList<HashMap<String,Object>>();
 		View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-		
 		 new CallAPI().execute(); 
-		
 		return rootView;
   
 }

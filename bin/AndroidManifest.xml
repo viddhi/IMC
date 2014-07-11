@@ -45,6 +45,11 @@
             android:label="" >
            
         </activity> 
+         <activity
+            android:name="com.example.imc.CategoriesPostList"
+            android:label="" >
+           
+        </activity> 
     </application>
 
 </manifest>

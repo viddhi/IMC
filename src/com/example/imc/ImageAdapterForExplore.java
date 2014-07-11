@@ -2,6 +2,7 @@ package com.example.imc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import android.app.Activity;
 import android.content.Context;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.TextView;
  
 public class ImageAdapterForExplore extends BaseAdapter {
@@ -58,42 +60,48 @@ public class ImageAdapterForExplore extends BaseAdapter {
          Display display = wm.getDefaultDisplay();
          Point size = new Point();
          display.getSize(size);
-         int width = (size.x / 3) - 30;
-        // int height = size.y;
+       //  int width = (size.x / 4) + 30;
+        
         TextView tv = new TextView(mContext);
         tv.setText(CategoryName + "\n" + PostCount + " " + "Posts");
         tv.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         tv.setTextColor(Color.WHITE);
-        tv.setWidth(width);
-        if(position % 3 == 0)
-        {
-        	tv.setBackgroundResource(R.drawable.darkgreen);
-        }
-        else if(position % 4 ==0)
-        {
-        	tv.setBackgroundResource(R.drawable.lightgreen);
-        }
-        else if(position % 5 ==0)
+        
+        Random rand = new Random();
+        int randNum = rand.nextInt(4);
+        if(randNum == 1)
         {
         	tv.setBackgroundResource(R.drawable.lightorange);
         }
-        else if(position % 6 ==0)
+        else if(randNum == 2)
         {
-        	tv.setBackgroundResource(R.drawable.darkorange);
+        	tv.setBackgroundResource(R.drawable.darkgreen);
+        }
+        else if(randNum ==3)
+        {
+        	tv.setBackgroundResource(R.drawable.lightgreen);
+        }
+        else if(randNum == 4)
+        {
+        	tv.setBackgroundResource(R.drawable.lightorange);
         }
         else 
         {
         	tv.setBackgroundResource(R.drawable.darkorange);
+        	
         }
-        int Height = 100 + Integer.parseInt(PostCount);
-        if(Height > 200)
+        int MaxHeight = 450;
+        int Height = 150 + Integer.parseInt(PostCount);
+        if(Height >= MaxHeight)
         {
-        	Height = 200;
+        	Height = MaxHeight;
         }
-        tv.setHeight(Height);
+      // tv.setHeight(Height);
+       //tv.setWidth(200);
+       
         Typeface face=Typeface.createFromAsset(mContext.getAssets(), "Roboto-Light.ttf"); 
         tv.setTypeface(face); 
-       
+        tv.setLayoutParams(new GridView.LayoutParams(200, Height));
         return tv;
      
         

@@ -37,6 +37,7 @@
            <string name="LikeMsg">Thank you for liking the post! Would you like to share it with your friends?</string>
            <string name="btnCancel">Cancel</string>
            <string name="btnShare">Share</string>
+           <string name="EIMCHeader">Explore IMC</string>
            
 
 </resources>

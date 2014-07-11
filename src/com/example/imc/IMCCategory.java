@@ -5,9 +5,15 @@ public class IMCCategory  {
 	public int CategoryID;
 	public String CategoryName;
 	public String PostCount;
+	public String Slug;
 	
-	
-	
+	public String getSlug(String _slug)
+	{
+		return _slug;
+	}
+	public void setSlug(String _slug){
+		this.Slug = _slug;
+	}
 	public String getCategoryName(String _categoryName)
 	{
 		return _categoryName;
