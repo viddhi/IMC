@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.webkit.WebView;
+import android.webkit.WebSettings.LayoutAlgorithm;
 import android.widget.Button;
 
 
@@ -56,6 +57,7 @@ public class SingleCommentActivity extends Activity {
     		   		+ "</body></html>";
     		   		
         WebView myWebView = (WebView) findViewById(R.id.SingleCommentView);
+        myWebView.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
         myWebView.loadData(Html, "text/html", null);
        
     }

@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.TextView;
  
 public class ImageAdapterForExplore extends BaseAdapter {
@@ -101,7 +100,7 @@ public class ImageAdapterForExplore extends BaseAdapter {
        
         Typeface face=Typeface.createFromAsset(mContext.getAssets(), "Roboto-Light.ttf"); 
         tv.setTypeface(face); 
-        tv.setLayoutParams(new GridView.LayoutParams(200, Height));
+       // tv.setLayoutParams(new GridView.LayoutParams(200, Height));
         return tv;
      
         
