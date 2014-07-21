@@ -147,7 +147,7 @@ public class SinglePostActivity extends Activity {
         myDialog = new Dialog(this);
         myDialog.setContentView(R.layout.activity_likemsg);
         myDialog.setCancelable(true);
-        //myDialog.setTitle( "Share your thoughts" );
+        myDialog.setTitle( "Thank You for your interest " );
         Button cancel = (Button) myDialog.findViewById(R.id.ButtonCancel);
         Button share = (Button) myDialog.findViewById(R.id.ButtonShare);
         

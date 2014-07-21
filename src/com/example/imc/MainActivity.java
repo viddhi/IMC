@@ -1,9 +1,17 @@
 package com.example.imc;
 
 
+import java.util.Calendar;
+
+import com.example.imc.AlarmReceiver;
+
 import android.app.ActionBar;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.ActionBar.Tab;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -28,7 +36,15 @@ private String[] tabs = { "Home","Buzz","About","Explore" };
 protected void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	
-	
+	// Set the alarm to start at approximately 9 a.m.
+    Calendar calendar = Calendar.getInstance();
+    calendar.setTimeInMillis(System.currentTimeMillis());
+    calendar.set(Calendar.HOUR_OF_DAY, 9);
+    Intent intentAlarm = new Intent(this, AlarmReceiver.class);
+    // create the object
+    AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+    alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+            AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this,1,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
 	setContentView(R.layout.activity_main);
 	
 	// Initilization

@@ -50,6 +50,8 @@
             android:label="" >
            
         </activity> 
+          <receiver android:name=".AlarmReceiver" /> 
     </application>
+   
 
 </manifest>

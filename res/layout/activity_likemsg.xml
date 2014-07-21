@@ -35,11 +35,13 @@
     android:text="@string/LikeMsg">
 </TextView>
  
-<RelativeLayout>
+<RelativeLayout
+    android:layout_width="300dp"
+        android:layout_height="wrap_content">
     
 <Button
     android:id="@+id/ButtonCancel"
-    android:layout_width="fill_parent"
+    android:layout_width="100dp"
         android:layout_height="wrap_content"
          android:textColor="#FF6600"
      	android:background="@drawable/white_rectangle"
@@ -49,12 +51,11 @@
         android:layout_marginLeft="24dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="16dp"
-    android:text="@string/btnCancel"
-    android:onClick="cancel">
+    android:text="@string/btnCancel">
 </Button>
 <Button
     android:id="@+id/ButtonShare"
-    android:layout_width="fill_parent"
+    android:layout_width="100dp"
         android:layout_height="wrap_content"
          android:layout_gravity="center"
          android:layout_toRightOf="@+id/ButtonCancel"
@@ -65,8 +66,7 @@
         android:layout_marginLeft="24dp"
         android:layout_marginRight="4dp"
         android:layout_marginBottom="16dp"
-    android:text="@string/btnShare"
-    android:onClick="share">
+    android:text="@string/btnShare">
 </Button>
  </RelativeLayout>
     </LinearLayout>
