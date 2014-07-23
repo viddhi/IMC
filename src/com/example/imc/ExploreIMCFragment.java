@@ -2,6 +2,7 @@ package com.example.imc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -9,6 +10,10 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.example.imc.GlobalState.TrackerName;
+import com.google.android.gms.analytics.Tracker;
+
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.app.ProgressDialog;
@@ -35,7 +40,13 @@ public class ExploreIMCFragment extends Fragment {
 		ConstUtilities.categoriesLists =  new ArrayList<HashMap<String,Object>>();
 		    View v = inflater.inflate(R.layout.fragment_exploreimc, container, false);
 		    gridView = (GridView) v.findViewById(R.id.grid_view);
-		    
+		 // Get tracker.
+	        Tracker t = ((GlobalState) getActivity().getApplication()).getTracker(
+	            TrackerName.APP_TRACKER);
+
+	        // Set screen name.
+	        // Where path is a String representing the screen name.
+	        t.setScreenName("/ExploreIMC");
 
 	        gridView.setOnItemClickListener(new OnItemClickListener() {
 	            @Override

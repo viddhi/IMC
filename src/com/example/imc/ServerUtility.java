@@ -22,6 +22,7 @@ public class ServerUtility {
 		int NumOfPostsFound =0;
 		try
 		{
+			PrevCheckedDate = PrevCheckedDate.replace('/', '-');
 			//Strict mode
 			StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 		    StrictMode.setThreadPolicy(policy);
@@ -29,7 +30,7 @@ public class ServerUtility {
 			 DefaultHttpClient httpClient = new DefaultHttpClient();
 	         HttpEntity httpEntity = null;
 	         HttpResponse httpResponse = null;
-	         String Url = String.format(ConstUtilities.getNumberOfPosts, PrevCheckedDate.substring(0, 10));
+	         String Url = String.format(ConstUtilities.getNumberOfPosts, PrevCheckedDate);
 	         HttpGet httpGet = new HttpGet(Url);
          
 	         httpResponse = httpClient.execute(httpGet);

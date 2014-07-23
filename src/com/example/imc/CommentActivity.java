@@ -1,5 +1,6 @@
 package com.example.imc;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -14,7 +15,9 @@ import org.json.JSONObject;
 import android.app.Dialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -41,7 +44,13 @@ public class CommentActivity  extends ListActivity {
 	Dialog myDialog = null;
 	View rootView;
 	String PostID = null;
+	String PostTitle = null;
 	 public Typeface face;
+	 SharedPreferences prefs =null;
+	 String CmtName = "com.example.imc.CmtName";
+	 String CmtEmail = "com.example.imc.CmtEmail";
+	 String storedName = "";
+	 String storedEmail = "";
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
@@ -52,7 +61,9 @@ public class CommentActivity  extends ListActivity {
         face=Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf"); 
         Intent in = getIntent();
         PostID = in.getStringExtra("CommentPostID");
-        
+        PostTitle = in.getStringExtra("CommentPostTitle");
+         prefs = getSharedPreferences("com.example.imc", Context.MODE_PRIVATE);
+		
         
         list.setOnItemClickListener(new OnItemClickListener() {
   	
@@ -86,6 +97,7 @@ public class CommentActivity  extends ListActivity {
         face=Typeface.createFromAsset(getAssets(), "Roboto-Black.ttf"); 
         TextView txtView2=(TextView)findViewById(R.id.Header);
         txtView2.setTypeface(face);
+        txtView2.setText(Html.fromHtml(PostTitle));
         txtView2.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         txtView2.setOnClickListener(new OnClickListener() {
         	public void onClick(View v) {
@@ -98,6 +110,7 @@ public class CommentActivity  extends ListActivity {
 	
 	private void callCommentDialog() 
     {
+		 
         myDialog = new Dialog(this);
         myDialog.setContentView(R.layout.activity_submitcmt);
         myDialog.setCancelable(true);
@@ -106,6 +119,22 @@ public class CommentActivity  extends ListActivity {
         ((TextView)myDialog.findViewById(R.id.EditTextFeedbackBody)).setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf"));
         myDialog.setTitle( "Share your thoughts" );
         ((TextView)myDialog.findViewById(android.R.id.title)).setTypeface(Typeface.createFromAsset(getAssets(),"Roboto-Black.ttf"));
+        //Checking if their name is in share preference if so set else leave it empty
+        EditText emailaddr = (EditText) myDialog.findViewById(R.id.EditTextEmail);
+        EditText username = (EditText) myDialog.findViewById(R.id.EditTextName);
+         storedName = prefs.getString(CmtName, null);
+         storedEmail = prefs.getString(CmtEmail, null);
+	        if(storedName != null)
+	        {
+	        username.setText(storedName);
+	        }
+	        if(storedEmail != null)
+	        {
+	        	emailaddr.setText(storedEmail);
+	        }
+       
+        
+        
         Button submit = (Button) myDialog.findViewById(R.id.ButtonSendFeedback);
         submit.setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf"));
          myDialog.show();
@@ -119,6 +148,8 @@ public class CommentActivity  extends ListActivity {
         	   EditText emailaddr = (EditText) myDialog.findViewById(R.id.EditTextEmail);
                EditText username = (EditText) myDialog.findViewById(R.id.EditTextName);
                EditText message = (EditText) myDialog.findViewById(R.id.EditTextFeedbackBody);
+               prefs.edit().putString(CmtEmail, emailaddr.getText().toString()).apply();
+               prefs.edit().putString(CmtName, username.getText().toString()).apply();
                boolean status = ServerUtility.postComment(PostID, username.getText().toString(), emailaddr.getText().toString(), message.getText().toString());
                if(status)
                {

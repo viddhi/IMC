@@ -11,6 +11,9 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.example.imc.GlobalState.TrackerName;
+import com.google.android.gms.analytics.Tracker;
+
 import android.support.v4.app.ListFragment;
 import android.text.Html;
 import android.app.ProgressDialog;
@@ -37,7 +40,13 @@ public class HomeFragment extends ListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState)
 	{
-		
+		// Get tracker.
+        Tracker t = ((GlobalState) getActivity().getApplication()).getTracker(
+            TrackerName.APP_TRACKER);
+
+        // Set screen name.
+        // Where path is a String representing the screen name.
+        t.setScreenName("/Home");
 		ConstUtilities.postLists =  new ArrayList<HashMap<String,Object>>();
 		View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 		 new CallAPI().execute(); 

@@ -11,6 +11,9 @@ import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import com.example.imc.GlobalState.TrackerName;
+import com.google.android.gms.analytics.Tracker;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -39,6 +42,13 @@ public class TheBuzzFragment extends ListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState){
 		commentList = new ArrayList<HashMap<String,Object>>();
+		// Get tracker.
+        Tracker t = ((GlobalState) getActivity().getApplication()).getTracker(
+            TrackerName.APP_TRACKER);
+
+        // Set screen name.
+        // Where path is a String representing the screen name.
+        t.setScreenName("/TheBuzz");
 		 rootView = inflater.inflate(R.layout.fragment_thebuzz, container, false);
 		 if(commentList.size() == 0)
 		 {

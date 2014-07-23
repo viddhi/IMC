@@ -13,14 +13,13 @@
         android:layout_height="wrap_content"
         android:textSize="22sp"
         android:gravity="center"
-        android:text="@string/bHeader"
         android:textColor="#66CC33" />
      <TextView
         android:id="@+id/shareLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="5dp"
         android:layout_below="@+id/Header"
         android:text="@string/bLink"
         android:textColor="#FF6600" />

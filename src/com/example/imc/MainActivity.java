@@ -40,11 +40,20 @@ protected void onCreate(Bundle savedInstanceState) {
     Calendar calendar = Calendar.getInstance();
     calendar.setTimeInMillis(System.currentTimeMillis());
     calendar.set(Calendar.HOUR_OF_DAY, 9);
+    calendar.set(Calendar.MINUTE, 30);
     Intent intentAlarm = new Intent(this, AlarmReceiver.class);
     // create the object
-    AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-    alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-            AlarmManager.INTERVAL_DAY, PendingIntent.getBroadcast(this,1,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
+    boolean alarmUp = (PendingIntent.getBroadcast(this, 0, 
+            new Intent(this,AlarmReceiver.class), 
+            PendingIntent.FLAG_NO_CREATE) != null);
+    if(!alarmUp)
+    {
+    PendingIntent pendingIntent = PendingIntent.getBroadcast(this,0, intentAlarm, PendingIntent.FLAG_CANCEL_CURRENT);
+    AlarmManager alarm = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+    alarm.cancel(pendingIntent);
+    alarm.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
+    }
+    
 	setContentView(R.layout.activity_main);
 	
 	// Initilization

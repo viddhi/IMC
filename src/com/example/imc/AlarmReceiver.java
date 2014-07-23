@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+
 import com.example.imc.MainActivity;
 import com.example.imc.R;
 import com.example.imc.ServerUtility;
@@ -24,10 +25,14 @@ public class AlarmReceiver extends BroadcastReceiver
         	 //Shared preference
  	        SharedPreferences prefs = context.getSharedPreferences("com.example.imc", Context.MODE_PRIVATE);
  	        String dateTimeKey = "com.example.imc.datetime";
- 	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+ 	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZZZZ");
  	        Calendar cal = Calendar.getInstance();
- 	        prefs.edit().putString(dateTimeKey, dateFormat.format(cal.getTime())).commit();
  	        String storedDateTime = prefs.getString(dateTimeKey, null);
+ 	        if(storedDateTime.isEmpty())
+ 	        {
+ 	        	storedDateTime = dateFormat.format(cal.getTime());
+ 	        }
+
  	        int foundPost = ServerUtility.returnPostCount(storedDateTime);
  	        if(foundPost > 0)
  	        {
@@ -61,7 +66,8 @@ public class AlarmReceiver extends BroadcastReceiver
  	        	mNotificationManager.notify(mId, mBuilder.build());
  	        	
  	        }
- 	       prefs.edit().putString(dateTimeKey, storedDateTime).commit();
+ 	       prefs.edit().putString(dateTimeKey, dateFormat.format(cal.getTime())).apply();
+ 	      
  	       
              }
       

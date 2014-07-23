@@ -62,7 +62,8 @@ public class ImageAdapterForExplore extends BaseAdapter {
         		 //
          String CategoryName = category.get(ConstUtilities.Node_CategoryName).toString();
          String PostCount = category.get(ConstUtilities.Node_PostCount).toString();
-        // String Slug = category.get("slug").toString();
+         String Slug = category.get("slug").toString();
+         Slug = Slug.replace('-', '_');
          WindowManager wm = (WindowManager) mContext.getSystemService(Context.WINDOW_SERVICE);
          Display display = wm.getDefaultDisplay();
          Point size = new Point();
@@ -73,7 +74,7 @@ public class ImageAdapterForExplore extends BaseAdapter {
         tv.setText(CategoryName + "\n" + PostCount + " " + "Posts");
         tv.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
         tv.setTextColor(Color.WHITE);
-        int imgID = mContext.getResources().getIdentifier("travel","drawable", mContext.getPackageName());
+        int imgID = mContext.getResources().getIdentifier(Slug,"drawable", mContext.getPackageName());
         tv.setCompoundDrawablesWithIntrinsicBounds(imgID , 0, 0, 0);
         
         Random rand = new Random();

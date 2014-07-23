@@ -29,6 +29,7 @@ public class SinglePostActivity extends Activity {
 	WebView myWebView;
 	String PageUrl = null;
 	String PostID = null;
+	String PostTitle = null;
 	boolean firstTime = true;
 	 String ZillaLikeCnt = null;
 	 String CmtCnt = null;
@@ -122,6 +123,7 @@ public class SinglePostActivity extends Activity {
         	public void onClick(View v) {
         		Intent in = new Intent(getApplicationContext(),CommentActivity.class);
         		in.putExtra("CommentPostID", PostID);
+        		in.putExtra("CommentPostTitle", PostTitle);
           		startActivity(in);
                     }
         });
@@ -148,8 +150,13 @@ public class SinglePostActivity extends Activity {
         myDialog.setContentView(R.layout.activity_likemsg);
         myDialog.setCancelable(true);
         myDialog.setTitle( "Thank You for your interest " );
+        ((TextView)myDialog.findViewById(R.id.Header)).setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf"));
+        ((TextView)myDialog.findViewById(R.id.Msg)).setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf"));
+        ((TextView)myDialog.findViewById(android.R.id.title)).setTypeface(Typeface.createFromAsset(getAssets(),"Roboto-Black.ttf"));
         Button cancel = (Button) myDialog.findViewById(R.id.ButtonCancel);
+        cancel.setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf"));
         Button share = (Button) myDialog.findViewById(R.id.ButtonShare);
+        share.setTypeface(Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf"));
         
 
          myDialog.show();
@@ -200,6 +207,7 @@ public class SinglePostActivity extends Activity {
  		   	   
  		   	    Spanned tempTitle = (Spanned) post.get(ConstUtilities.Node_Title);
  		   	    CleanTitle = Html.toHtml(tempTitle);
+ 		   	    PostTitle = CleanTitle;
  		   	    Image = post.get(ConstUtilities.Node_Image).toString();
  		   	    DatePosted = (String) post.get(ConstUtilities.Node_Date);
  		   	    DatePosted = DatePosted.substring(0,10);

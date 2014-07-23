@@ -7,7 +7,7 @@ public class ConstUtilities {
 	
 	
 	//API 
-	public static String getPosts = "https://public-api.wordpress.com/rest/v1/sites/www.indianmomsconnect.com/posts?number=10&context=default&pretty=true";
+	public static String getPosts = "https://public-api.wordpress.com/rest/v1/sites/www.indianmomsconnect.com/posts?number=14&context=default&pretty=true";
 	public static String getNumberOfPosts = "https://public-api.wordpress.com/rest/v1/sites/www.indianmomsconnect.com/posts?after=%s&pretty=1";
 	public static String getComments = "https://public-api.wordpress.com/rest/v1/sites/www.indianmomsconnect.com/comments?number=25&pretty=1";
 	public static String getSinglePost = "https://public-api.wordpress.com/rest/v1/sites/www.indianmomsconnect.com/posts/";
