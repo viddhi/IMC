@@ -14,8 +14,10 @@ import android.text.Spanned;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings.LayoutAlgorithm;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -47,7 +49,7 @@ public class SinglePostActivity extends Activity {
         setContentView(R.layout.activity_singlepost);
         face=Typeface.createFromAsset(getAssets(), "Roboto-Light.ttf"); 
         myWebView = (WebView) findViewById(R.id.SinglePostView);
-        myWebView.getSettings().setLayoutAlgorithm(LayoutAlgorithm.SINGLE_COLUMN);
+       
         Button btnback = (Button) findViewById(R.id.btnPrev);
         TextView tv1 = (TextView) findViewById(R.id.txtCmtCnt);
         TextView tv2 = (TextView) findViewById(R.id.txtLikeCnt);
@@ -130,7 +132,12 @@ public class SinglePostActivity extends Activity {
        
        
         String Html = LoadWebView(Position);
+        myWebView.setWebChromeClient(new WebChromeClient());
+        myWebView.setWebViewClient(new WebViewClient());
+        myWebView.clearCache(true);
+        myWebView.clearHistory();
         myWebView.getSettings().setJavaScriptEnabled(true);
+        myWebView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         myWebView.getSettings().setDomStorageEnabled(true);
         myWebView.loadDataWithBaseURL(null, Html, "text/html", "UTF-8", null);
 
@@ -212,7 +219,7 @@ public class SinglePostActivity extends Activity {
  		   	    DatePosted = (String) post.get(ConstUtilities.Node_Date);
  		   	    DatePosted = DatePosted.substring(0,10);
  		   	    CleanContent = (String) post.get(ConstUtilities.Node_Content);
- 		   	    
+ 		   	    CleanContent = CleanContent.replace("//ws-na.amazon-adsystem.com", "http://ws-na.amazon-adsystem.com");
  		   	    Author = post.get(ConstUtilities.Node_Author).toString();
  		   	    PostID = post.get(ConstUtilities.Node_ID).toString();
  		   	   

@@ -10,10 +10,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import com.example.imc.GlobalState.TrackerName;
 import com.google.android.gms.analytics.Tracker;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -37,6 +35,7 @@ public class TheBuzzFragment extends ListFragment {
 	ListView list;
 	IMCCmtAdapter adapter;
 	View rootView;
+	boolean isBuzLoaded = false;
 	
 	
 	@Override
@@ -50,12 +49,18 @@ public class TheBuzzFragment extends ListFragment {
         // Where path is a String representing the screen name.
         t.setScreenName("/TheBuzz");
 		 rootView = inflater.inflate(R.layout.fragment_thebuzz, container, false);
-		 if(commentList.size() == 0)
-		 {
-		new CallAPI().execute();
-		 }
 		return rootView;
 	}
+	
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+	    super.setUserVisibleHint(isVisibleToUser);
+	    if (isVisibleToUser && !isBuzLoaded ) {
+	    	new CallAPI().execute();
+	    	isBuzLoaded = true;
+	    }
+	}
+	
 	
 	@Override
 	  public void onActivityCreated(Bundle savedInstanceState) {

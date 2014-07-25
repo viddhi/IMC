@@ -34,6 +34,7 @@ public class ExploreIMCFragment extends Fragment {
 	ImageAdapterForExplore adapter;
 	IMCCategory _category = new IMCCategory();
 	GridView gridView ;
+	boolean isExploreIMCLoaded = false;
 	
 	@Override
 	   public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {	
@@ -60,10 +61,18 @@ public class ExploreIMCFragment extends Fragment {
 	                startActivity(i);
 	            }
 	        });
-		    new CallAPI().execute();
+		    
        
 		    return v;
 	    }
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+	    super.setUserVisibleHint(isVisibleToUser);
+	    if (isVisibleToUser && !isExploreIMCLoaded ) {
+	    	new CallAPI().execute();
+	    	isExploreIMCLoaded = true;
+	    }
+	}
 	
 	private class CallAPI extends AsyncTask<Void, Void, Void> {
 		ProgressDialog Asycdialog = new ProgressDialog(getActivity());

@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 
@@ -62,8 +63,7 @@ protected void onCreate(Bundle savedInstanceState) {
 	mAdapter = new TabsPagerAdapter(getSupportFragmentManager());
 
 	viewPager.setAdapter(mAdapter);
-	actionBar.setHomeButtonEnabled(true);
-	
+	actionBar.setHomeButtonEnabled(true);	
 	actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);		
 	actionBar.setDisplayShowTitleEnabled(false);
 	Typeface face=Typeface.createFromAsset(getAssets(), "Roboto-Black.ttf"); 
@@ -111,7 +111,16 @@ public void onTabSelected(Tab tab, FragmentTransaction ft) {
 	// show respected fragment view
 	viewPager.setCurrentItem(tab.getPosition());
 }
-
+@Override
+public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()) {
+    case android.R.id.home:
+    	viewPager.setCurrentItem(0);
+        return true;
+    default:
+        return super.onOptionsItemSelected(item);
+    }
+}
 @Override
 public void onTabUnselected(Tab tab, FragmentTransaction ft) {
 }

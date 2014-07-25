@@ -3,11 +3,15 @@ package com.example.imc;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
+
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -71,12 +75,17 @@ public class ImageAdapterForExplore extends BaseAdapter {
          int Width = 322;
         		 //(size.x / 4) + 30;
        
-        tv.setText(CategoryName + "\n" + PostCount + " " + "Posts");
-        tv.setGravity(Gravity.CENTER_VERTICAL | Gravity.CENTER_HORIZONTAL);
+        tv.setText("   " + CategoryName + "\n" +"   " + PostCount + " " + "Posts");
+       tv.setGravity(Gravity.CENTER_VERTICAL);
         tv.setTextColor(Color.WHITE);
         int imgID = mContext.getResources().getIdentifier(Slug,"drawable", mContext.getPackageName());
-        tv.setCompoundDrawablesWithIntrinsicBounds(imgID , 0, 0, 0);
-        
+        Drawable dr = mContext.getResources().getDrawable(imgID);
+        Bitmap bitmap = ((BitmapDrawable) dr).getBitmap();
+        // Scale it to 50 x 50
+        Drawable d = new BitmapDrawable(mContext.getResources(), Bitmap.createScaledBitmap(bitmap, 50, 50, true));
+       // tv.setCompoundDrawablesRelativeWithIntrinsicBounds(d, null, null, null);
+        tv.setCompoundDrawablesWithIntrinsicBounds(d, null, null, null);
+        tv.setPadding(20, 0, 0, 0);
         Random rand = new Random();
         int randNum = rand.nextInt(4);
         if(randNum == 1)
@@ -106,9 +115,9 @@ public class ImageAdapterForExplore extends BaseAdapter {
         {
         	Height = MaxHeight;
         }
-       tv.setHeight(Height);
-       tv.setWidth(Width);
-        tv.setLayoutParams(new AbsListView.LayoutParams(Width,Height));
+      // tv.setHeight(Height);
+       //tv.setWidth(Width);
+        //tv.setLayoutParams(new AbsListView.LayoutParams(Width,Height));
         Typeface face=Typeface.createFromAsset(mContext.getAssets(), "Roboto-Light.ttf"); 
         tv.setTypeface(face); 
       //  llParent.addView(tv);
