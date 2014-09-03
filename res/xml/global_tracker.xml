@@ -7,16 +7,16 @@ tools:ignore="TypographyDashes">
     <bool name="ga_autoActivityTracking">true</bool>
 
     <!-- The screen names that will appear in reports -->
-    <screenName name="com.example.imc.HomeFragment">
+    <screenName name="com.imc.mobile.android.HomeFragment">
         Home ScreenView
     </screenName>
-     <screenName name="com.example.imc.AboutFragment">
+     <screenName name="com.imc.mobile.android.AboutFragment">
         About ScreenView
     </screenName>
-     <screenName name="com.example.imc.TheBuzzFragment">
+     <screenName name="com.imc.mobile.android.TheBuzzFragment">
         TheBuzz ScreenView
     </screenName>
-     <screenName name="com.example.imc.ExploreIMCFragment">
+     <screenName name="com.imc.mobile.android.ExploreIMCFragment">
         ExploreIMC ScreenView
     </screenName>
     
